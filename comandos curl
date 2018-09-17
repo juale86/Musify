@@ -1,0 +1,38 @@
+curl -X PUT \                 
+-H "Content-Type: application/json" \
+-H "Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoianVhbjEwIiwic3VybmFtZSI6Imp1YW4xMCIsImVtYWlsIjoianVhbjEwQGp1YW4xMC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaW1hZ2UiOm51bGwsImlhdCI6MTUzMTkwMTgzMiwiZXhwIjoxNTM0NDkzODMyfQ.pt8fDs6xC1XR1wYOYQ8RFbLuTi1i22nzDRu1lhVf7Yg" \
+-d '{"email":"juan100@juan100.com","password":"juan100"}' \
+http://localhost:3977/api/update-user/5b4ef65ab09124306dc557c3
+
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{"email":"juan10@juan10.com","password":"juan10","getHash":"true"}' \
+http://localhost:3977/api/login
+
+
+curl -X POST \                
+-H "Content-Type: application/json" \
+-d '{"name":"juan10","surname":"juan10","email":"juan10@juan10.com","password":"juan10"}' \
+http://localhost:3977/api/register
+
+
+------------------------
+curl -X POST \
+-d 'email=juanchi@juanchi.com&password=juanchi' \  
+http://localhost:3977/api/login
+
+curl -X POST \
+-d 'email=juanchi@juanchi.com&password=juanchi&getHash=true' \
+http://localhost:3977/api/login
+{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoianVhbmNoaSIsInN1cm5hbWUiOiJqdWFuY2hpIiwiZW1haWwiOiJqdWFuY2hpQGp1YW5jaGkuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJpbWFnZSI6bnVsbCwiaWF0IjoxNTMyMzE4NTU0LCJleHAiOjE1MzQ5MTA1NTR9.jiRnw-jLvmvqMDroafP0447xicJe6qbx9dkyhafFir0"}%
+
+
+curl -X GET \ 
+-d 'email=juanchi@juanchi.com&password=juanchi&getHash=true' \
+http://localhost:3977/api/artist
+
+curl -X POST \
+-H "Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoianVhbjEwIiwic3VybmFtZSI6Imp1YW4xMCIsImVtYWlsIjoianVhbjEwQGp1YW4xMC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaW1hZ2UiOm51bGwsImlhdCI6MTUzMTkwMTgzMiwiZXhwIjoxNTM0NDkzODMyfQ.pt8fDs6xC1XR1wYOYQ8RFbLuTi1i22nzDRu1lhVf7Yg" \
+-F image=@foto.jpg \
+http://localhost:3977/api/upload-image-user/5b4ef65ab09124306dc557c3

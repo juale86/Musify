@@ -139,7 +139,6 @@ function uploadImage(req,res){
 	var file_name = 'No subido';
 	if(req.files){
 		var file_path = req.files.image.path;
-		//console.log(file_path);
 		//res.status(200).send({message:"Archivo subido correctamente"});
 		var file_split = file_path.split('/');
 		var file_name = file_split[2];
@@ -156,7 +155,8 @@ function uploadImage(req,res){
 						res.status(200).send({user: {
 							name:userUpdated.name,
 							surname:userUpdated.surname,
-							email: userUpdated.email
+							email: userUpdated.email,
+							image:file_name
 							}
 						});
 					}
