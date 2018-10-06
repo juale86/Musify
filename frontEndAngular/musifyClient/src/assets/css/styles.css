@@ -1,0 +1,99 @@
+html, body{
+	margin: 0;
+	height: 100%;
+	background: lightblue;
+}
+.head-title{
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 25px;
+	display:block;
+}
+
+.navigation{
+	text-align: center;
+	color:white;
+	background: #1C1C1F;
+	height: 100%;
+}
+
+.navigation a{
+	color:#ddd;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	display:block;
+	text-decoration: none;
+	margin-left: 30px;
+}
+
+.navigation a:hover{
+	color:white;
+}
+
+.navigation .fa{
+	font-size: 30px;
+	display: block;
+	width: 100%;
+	margin-top: 5px;
+}
+
+#user_logged{
+	text-align: center;
+	background: #1C1C1F;
+	bottom: 0px;
+	width: 75%;
+}
+
+.btn-logout{
+	cursor: pointer;	
+}
+
+#user_logged .user-image{
+	background: #eee;
+	border-radius: 100px;
+	height: 57px
+	width: 57px
+	margin: 0px auto;
+	margin-top: 15px;
+	overflow: hidden;
+}
+
+.actived{
+	border-bottom: 4px solid#84bd00;
+	padding-bottom: 4px;
+}
+
+.artist_image_for_edit img{
+	width: 150px;
+}
+.artist-list{
+	margin: 0px;
+	padding: 0px;
+	margin-top: 30px;
+	list-style: none;
+}
+.artist-item{
+	width: 20%;
+	margin: 0px;
+	padding: 0px;
+	height: 217px;
+	border: 1px solid #444;
+	margin-left: 20px;
+	margin-top: 20px;
+	display: inline-block;	
+}
+.artist-item .artist-image{
+	height: 50px;
+	width: 100%;
+	overflow:hidden;
+}
+
+.artist-item .artist-image img{
+	height: 100%;
+}
+
+.artist-item .artist-image{
+	height: 100%;
+	min-width: 100%;
+}

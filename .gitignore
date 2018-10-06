@@ -3,5 +3,5 @@ package-lock.json
 Extra/*
 dbData/*
 uploads/*
-frontEndAngular/
 frontEndReact/*
+frontEndAngular/musifyClient/src/node_modules
