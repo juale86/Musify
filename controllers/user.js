@@ -17,9 +17,9 @@ function pruebas(req,res){
 function saveUser(req,res){
 	var params = req.body;
 	if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(params.email)){
-		if(params.role){
+		if(!params.role){
 			// Intento de guardar con role
-			res.status(403).send({message:'¡|'});
+			res.status(403).send({message:'Te estás asignando un rol'});
 			//console.log('Intento de guardar con role al usuario: ',params.name,' ',params.surname);
 		} else {
 			User.findOne({email:params.email.toLowerCase()},(err,user) => {
@@ -47,6 +47,7 @@ function saveUser(req,res){
 												res.status(404).send(({menssage:'Usuario no registrado'}));
 											} else {
 												res.status(200).send({user:{
+														_id: userStored.id,
 														name:userStored.name,
 														surname:userStored.surname,
 														email:userStored.email
@@ -92,9 +93,10 @@ function loginUser(req,res){
 						// Devolver los datos del usuario logueado
 						if(params.getHash){
 							//Devolver un token jwt
+							//console.log('USER: ',user);
 							res.status(200).send({token:jwt.createToken(user)})
 						} else {
-							res.status(200).send({message:'Usuario logueado'});
+							res.status(200).send({user});
 						}
 					} else {
 						res.status(404).send({message:'El usuario no se ha podido loguear'});
@@ -108,7 +110,11 @@ function loginUser(req,res){
 function updateUser(req,res){
 	var userId = req.params.id;
 	var update = req.body;
-	if (!update.role) {
+	if(userId != req.body._id){
+		return res.status(500).send({message:'No tienes permiso para actualizar éste usuario'});
+	}
+
+	//if (!update.role) {
 		User.findByIdAndUpdate(userId,update,(err,userUpdated) => {
 			if(err){
 				res.status(500).send({message:'Error al actualizar el usuario'});
@@ -116,20 +122,22 @@ function updateUser(req,res){
 				if(!userUpdated){
 					res.status(404).send({message:'No se ha podido actualizar el usuario'});
 				} else {
-					console.log("JOJOJO");
-					res.status(200).send({user: {
-						name: userUpdated.name,
-						surname: userUpdated.surname,
-						email: userUpdated.email
-						}
-					});
+					//console.log('userUpdated:',userUpdated);
+					//res.status(200).send({user: {
+						//sur
+						//name: userUpdated.name,
+						//surname: userUpdated.surname,
+						//email: userUpdated.email
+						//}
+					//});
+					res.status(200).send({user:userUpdated});
 				}
 			}
 		});
-	} else {
-		// Intentando cambiar el role
-		res.status(401).send({message:'Error en el servidor'})
-	}
+	//} else {
+		//// Intentando cambiar el role
+		//res.status(401).send({message:'Error en el servidor'})
+	//}
 }
 
 //function resetPass(req,res){}
@@ -152,13 +160,7 @@ function uploadImage(req,res){
 					if(!userUpdated){
 						res.status(404).send({message:'No se ha podido actualizar el usuario'});
 					} else {
-						res.status(200).send({user: {
-							name:userUpdated.name,
-							surname:userUpdated.surname,
-							email: userUpdated.email,
-							image:file_name
-							}
-						});
+						res.status(200).send({user: userUpdated,image:file_name});
 					}
 				}
 			});

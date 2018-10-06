@@ -24,6 +24,8 @@ function getArtist(req,res){
 }
 
 function saveArtist(req,res){
+	// Hacer consulta si el usuario tiene permiso de grabar un artista
+	// Hacer middleware para chequeo de permisos
 	var artist = new Artist();
 	var params = req.body;
 
@@ -51,7 +53,7 @@ function getArtists(req,res){
 		var page = 1;
 	}
 	//var itemsPerPage = req.params.
-	var itemsPerPage = 3;
+	var itemsPerPage = 4;
 	Artist.find().sort('name').paginate(page, itemsPerPage, (err, artists, total) => {
 		if(err){
 			res.status(500).send({message:"Error en la query"});
@@ -69,16 +71,19 @@ function getArtists(req,res){
 
 function updateArtist(req,res){
 	var artistId = req.params.id;
-	var update= req.body;
+	var update = req.body;
 
-	Artist.findById(artistId, update, (err, artistUpdated) => {
-		if(err ){
+	Artist.findOneAndUpdate(artistId, update, (err, artistUpdated) => {
+		//console.log('ARTISTID:',artistId);
+		//console.log('UPDATE:',update);
+		if(err){
+			//console.log("ERR:",err);
 			res.status(500).send({message:"Error en la query del Artista"});
 		} else {
 			if(!artistUpdated){
 				res.status(404).send({message:"No se pudo actualizar el artista"});
 			} else {
-				res.status(200).send({artists: artistUpdated});
+				res.status(200).send({artist: artistUpdated});
 			}
 		}
 	});

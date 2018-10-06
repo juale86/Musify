@@ -5,8 +5,9 @@ var moment = require('moment');
 var secret = 'clavesita';
 
 exports.createToken = function(user){
+
 	var payLoad = {
-		sub: user._Id,
+		sub: user._id,
 		name: user.name,
 		surname: user.surname,
 		email: user.email,

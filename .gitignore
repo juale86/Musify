@@ -3,3 +3,5 @@ package-lock.json
 Extra/*
 dbData/*
 uploads/*
+frontEndAngular/
+frontEndReact/*
