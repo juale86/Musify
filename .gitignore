@@ -4,4 +4,4 @@ Extra/*
 dbData/*
 uploads/*
 frontEndReact/*
-frontEndAngular/musifyClient/src/node_modules
+frontEndAngular/musifyClient/node_modules/*
