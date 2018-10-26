@@ -4,29 +4,36 @@
 		Añadir artista
 	</a>
 	<ul class="pagination pull-right">
-		<li><a routerLink="/artistas/{{prev_page}}" class="page-link">&laquo;</a></li>
-		<li><a routerLink="/artistas/{{next_page}}" class="page-link">&raquo;</a></li>
-		<li></li>
+		<li>
+			<a routerLink="/artistas/{{prev_page}}" class="page-link">&laquo;</a>
+		</li>
+		<li>
+			<a routerLink="/artistas/{{next_page}}" class="page-link">&raquo;</a>
+		</li>
 	</ul>
 </div>
 
 <div class="clearfix"></div>
-	<ul class="artist-list" *ngIf="identity">
-		<li *ngFor="let artist of artists" class="col-lg-3 artist-item">
-			<div class="artist-image">
-				<img src="{{url+'get-image-artist/'+artist.image}}">
-			</div>
-			<div class="artist-name">
-				<a href="#">
-					{{artist.name}}
-				</a>
-			</div>
-			<div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
-				<a routerLink="/editar-artista/{{artist._id}}" class="page-link btn btn-warning">Editar</a>
-				<a href="" class="page-link btn btn-danger">Borrar</a>
-			</div>
-		</li>
-	</ul>
+<ul class="artist-list" *ngIf="identity">
+	<li *ngFor="let artist of artists" class="col-lg-3 artist-item">
+		<div class="artist-image">
+			<img src="{{url+'get-image-artist/'+artist.image}}">
+		</div>
+		<div class="artist-name">
+			<a routerLink="/artista/{{artist._id}}">
+				{{artist.name}}
+			</a>
+		</div>
+		<div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+			<a routerLink="/editar-artista/{{artist._id}}" class="page-link btn btn-warning">Editar</a>
+			<a (click)="onDeleteConfirm(artist._id)" class="page-link btn btn-danger">Borrar</a>
+		</div>
+		<div class="seguro" *ngIf="confirmado == artist._id">
+			<a (click)="onDeleteArtist(artist._id)" class="page-link btn btn-danger">Eliminar</a>
+			<a (click)="onCancelArtist(artist._id)" class="page-link btn btn-danger">Cancelar</a>
+		</div>
+	</li>
+</ul>
 
 <!--
 <router-outlet></router-outlet>

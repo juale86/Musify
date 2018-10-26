@@ -52,7 +52,6 @@ function getArtists(req,res){
 	} else {
 		var page = 1;
 	}
-	//var itemsPerPage = req.params.
 	var itemsPerPage = 4;
 	Artist.find().sort('name').paginate(page, itemsPerPage, (err, artists, total) => {
 		if(err){
@@ -63,7 +62,8 @@ function getArtists(req,res){
 			} else {
 				res.status(200).send({
 					total_artistas: total,
-					artists: artists});
+					artists: artists
+				});
 			}
 		}
 	});
@@ -74,10 +74,7 @@ function updateArtist(req,res){
 	var update = req.body;
 
 	Artist.findOneAndUpdate(artistId, update, (err, artistUpdated) => {
-		//console.log('ARTISTID:',artistId);
-		//console.log('UPDATE:',update);
 		if(err){
-			//console.log("ERR:",err);
 			res.status(500).send({message:"Error en la query del Artista"});
 		} else {
 			if(!artistUpdated){
@@ -99,7 +96,6 @@ function deleteArtist(req,res){
 			if(!artistRemoved){
 				res.status(404).send({message:"Artista no ha sido eliminado"});
 			} else {
-
 				Album.find({artist:artistRemoved._id}).remove((err, albumRemoved)=>{
 					if(err){
 						res.status(500).send({message:"Error en la query de delete Album"});
@@ -108,7 +104,7 @@ function deleteArtist(req,res){
 							res.status(404).send({message:"Album no ha sido eliminado"});
 						} else {
 							Song.find({album:albumRemoved._id}).remove((err,songRemoved) => {
-								if(!err){
+								if(err){
 									res.status(500).send({message:"Error en la query de delete Song"});
 								} else {
 									if(!songRemoved){

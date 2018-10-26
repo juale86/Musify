@@ -20,6 +20,7 @@ export class ArtistListComponent implements OnInit{
 	public url: string;
 	public next_page;
 	public prev_page;
+	public confirmado = null;
 
 	constructor(
 		private _route: ActivatedRoute,
@@ -36,7 +37,7 @@ export class ArtistListComponent implements OnInit{
 	}
 
 	ngOnInit(){
-		//console.log('artist-list.component.ts cargado');
+		console.log('artist-list.component.ts cargado');
 		this.getArtists();
 	}
 	getArtists(){
@@ -60,6 +61,7 @@ export class ArtistListComponent implements OnInit{
 						}
 					}, error => {
 						var errorMessage = <any>error;
+						alert(error);
 						if(errorMessage != null){
 							var body = JSON.parse(error._body);
 							//this.alertMessage = body.message;
@@ -69,5 +71,32 @@ export class ArtistListComponent implements OnInit{
 				);
 			}
 		});
+	}
+
+	onDeleteConfirm(id){
+		this.confirmado = id;
+	}
+
+	onCancelArtist(){
+		this.confirmado = null;
+	}
+
+	onDeleteArtist(id){
+		this._artistService.deleteArtist(this.token, id).subscribe(
+			response => {
+				if(!response.artist){
+					alert('Error en el servidor');
+				} else {
+					this.getArtists();
+				}
+			}, error => {
+				var errorMessage = <any>error;
+				if(errorMessage != null){
+					var body = JSON.parse(error._body);
+					//this.alertMessage = body.message;
+					console.log(errorMessage);
+				}
+			}
+		);
 	}
 }

@@ -17,7 +17,7 @@ function getAlbum(req,res){
 			if(!album){
 				res.status(404).send({message:'No existe el album'});
 			} else {
-				res.status(200).send(album);
+				res.status(200).send({album:album});
 			}
 		}
 	});
@@ -63,7 +63,7 @@ function getAlbums(req,res){
 			if(!albums){
 				res.status(404).send({message:'No hay albums'});
 			} else {
-				res.status(200).send({album:albums});
+				res.status(200).send({albums:albums});
 			}
 		}
 	});
@@ -72,8 +72,10 @@ function getAlbums(req,res){
 function updateAlbum(req,res){
 	var albumId = req.params.id;
 	var update = req.body;
+	console.log('UPDATE',update);
 	Album.findByIdAndUpdate(albumId,update,(err,albumUpdated)=>{
 		if(err){
+			//console.log('ERR',err);
 			res.status(500).send({message:'Error en el servidor'});
 		} else {
 			if(!albumUpdated){

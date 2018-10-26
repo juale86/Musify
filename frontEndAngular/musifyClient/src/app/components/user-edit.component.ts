@@ -21,7 +21,7 @@ export class UserEditComponent implements OnInit{
 	constructor(
 		private _userService:UserService
 	){
-		this.title = 'Título en user-edit.component';
+		this.title = 'Datos del usuario';
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.user = this.identity;

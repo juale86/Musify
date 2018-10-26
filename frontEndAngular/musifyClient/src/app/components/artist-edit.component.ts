@@ -81,17 +81,22 @@ export class ArtistEditComponent implements OnInit{
 						this.alertMessage = 'Error en la respuesta';
 					} else {
 						this.alertMessage = 'Artista actualizado correctamente';
+						if(!this.filesToUpload){
+							this._router.navigate(['./artista', response.artist._id]);
+						} else {
+
+						}
 						//Subir imagen del servicio
 						this._uploadService.makeFileRequest(this.url+'upload-image-artist/'+id, [], this.filesToUpload, this.token, 'image')
 							.then(
 								(result) => {
-									this._router.navigate(['/artistas',1]);
+									this._router.navigate(['/artistas',response.artist._id]);
 								}, (error) => {
 									console.log(error);
 								}
 							);
 						//this.artist = response.artist;
-						//this._router.navigate(['./editar-artista'], response.artist._id);
+						//this._router.navigate(['./editar-artista', response.artist._id]);
 					}
 				}, (error) => {
 					var errorMessage = error;

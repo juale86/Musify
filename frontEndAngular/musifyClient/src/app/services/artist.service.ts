@@ -68,6 +68,4 @@ export class ArtistService{
 			.map(res => res.json());
 	}
 
-	
-
 }
