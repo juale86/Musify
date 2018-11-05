@@ -92,19 +92,16 @@ export class ArtistDetailComponent implements OnInit{
 		this._albumService.deleteAlbum(this.token, id).subscribe(
 			response =>{
 				if(!response.album){
-					alert('No se recibieron albums');
+					alert('No se recibieron albums. Pero las canciones si fueron eliminadas.');
 				}
 				this.getArtist();
-			}, error => {
-				var errorMessage = error;
-				console.log('ERROR',error);
+			}, errorMessage => {
+				console.log('ERROR',errorMessage);
 				if(errorMessage != null){
-					var body = JSON.parse(error._body);
-					this.alertMessage = error._body.message;
-					//this.alertMessage = body.message;
+					var body = JSON.parse(errorMessage._body);
+					this.alertMessage = errorMessage._body.message;
 				}
 			}
 		);
 	}
-
 }

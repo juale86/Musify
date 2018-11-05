@@ -9,7 +9,6 @@ var Song = require('../models/song');
 
 function getSong(req,res){
 	var songId = req.params.id;
-
 	Song.findById(songId).populate({path:'album'}).exec((err,song) => {
 		if(err){
 			res.status(500).send({message:'Error en la petición'});
@@ -17,7 +16,7 @@ function getSong(req,res){
 			if(!song){
 				res.status(404).send({message:'La canción no existe'});
 			} else {
-				res.status(200).send({song});
+				res.status(200).send({song:song});
 			}
 		}
 	});
@@ -77,7 +76,6 @@ function getSongs(req,res){
 function updateSong(req,res){
 	var songId = req.params.id;
 	var update = req.body;
-
 	Song.findByIdAndUpdate(songId,update,(err,songUpdated) => {
 		if(err){
 			res.status(500).send({message:'Error en el servidor'});
@@ -116,7 +114,7 @@ function uploadFile(req,res){
 		var file_name = file_split[2];
 		var ext_split = file_name.split('.');
 		var file_ext = ext_split[1];
-		if(file_ext == 'mp4' || file_ext == 'ogg'){
+		if(file_ext == 'mp3' || file_ext == 'ogg'|| file_ext == 'mp4'){
 			Song.findByIdAndUpdate(songId,{file: file_name},(err,songUpdated) => {
 				if(err){
 					res.status(500).send({message:'Error al subir la canción.'});
@@ -141,6 +139,7 @@ function getSongFile(req,res){
 	var path_file = './uploads/songs/'+songFile;
 	fs.exists(path_file, (exists) => {
 		if (exists){
+			console.log('La canción si existe');
 			res.sendFile(path.resolve(path_file));
 		} else {
 			res.status(200).send({message:'No existe la canción...'});

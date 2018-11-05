@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div *ngIf="identity" class="navigation col-md-2">
 			<h1 class="head-title">
@@ -41,6 +41,8 @@
 
 		<div [class.hidden]="!identity" class="central col-md-6">
 			<router-outlet></router-outlet>
+			<div class="clearfix"></div>
+			<player class="player" *ngIf="identity"></player>
 		</div>
 
 		<div class="row" *ngIf="!identity">

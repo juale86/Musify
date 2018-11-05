@@ -87,9 +87,9 @@ export class AlbumEditComponent implements OnInit{
 						} else {
 							this._uploadService.makeFileRequest(this.url+'upload-image-album/'+id, [], this.filesToUpload, this.token, 'image')
 							.then(
-								(result) => {
+								result => {
 									this._router.navigate(['/artista',this.album.artist['_id']]);
-								}, (error) => {
+								}, error => {
 									console.log(error);
 								}
 							);

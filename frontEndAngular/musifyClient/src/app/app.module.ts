@@ -10,20 +10,28 @@ import { ArtistAddComponent } from './components/artist-add.component';
 import { ArtistEditComponent } from './components/artist-edit.component';
 import { AlbumEditComponent } from './components/album-edit.component';
 import { ArtistDetailComponent } from './components/artist-detail.component';
+import { AlbumDetailComponent } from './components/album-detail.component';
 import { AlbumAddComponent } from './components/album-add.component';
+import { SongAddComponent } from './components/song-add.component';
+import { SongEditComponent } from './components/song-edit.component';
 import { HomeComponent } from './components/home.component';
+import { PlayerComponent } from './components/player.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UserEditComponent,
-    ArtistListComponent,
-    ArtistAddComponent,
     HomeComponent,
+    UserEditComponent,
+    AppComponent,
+    ArtistAddComponent,
     ArtistDetailComponent,
-    AlbumAddComponent,
     ArtistEditComponent,
-    AlbumEditComponent
+    ArtistListComponent,
+    AlbumAddComponent,
+    AlbumEditComponent,
+    AlbumDetailComponent,
+    SongAddComponent,
+    SongEditComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,

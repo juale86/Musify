@@ -72,7 +72,6 @@ function getAlbums(req,res){
 function updateAlbum(req,res){
 	var albumId = req.params.id;
 	var update = req.body;
-	console.log('UPDATE',update);
 	Album.findByIdAndUpdate(albumId,update,(err,albumUpdated)=>{
 		if(err){
 			//console.log('ERR',err);
@@ -94,11 +93,11 @@ function deleteAlbum(req,res){
 			res.status(500).send({message:"Error en la query de delete Album"});
 		} else {
 			if(!albumRemoved){
-				res.status(404).send({message:"Album no ha sido eliminado"});
+				res.status(404).send({message:"No se encontró el album"});
 			} else {
-				Song.find({album:albumRemoved._id}).remove((err,songRemoved) => {
-					if(!err){
-						res.status(500).send({message:"Error al borrar la canción"});
+				Song.find({album:albumRemoved._id}).remove((songErr,songRemoved) => {
+					if(!songErr){
+						res.status(200).send({message:"Album Eliminado sin canciones"});
 					} else {
 						if(!songRemoved){
 							res.status(404).send({message:'Song deleted'});
